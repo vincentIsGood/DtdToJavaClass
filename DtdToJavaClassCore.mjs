@@ -295,11 +295,11 @@ class ClassGenerator{
             for(let name in def.dependencies){
                 const dependency = def.dependencies[name];
                 if(dependency == null) continue;
+                let arraySymbol = dependency.isArray? "[]" : "";
                 if(dependency.dependency[0]?.dependencies["#PCDATA"] == "invalid"){
-                    let arraySymbol = dependency.isArray? "[]" : "";
                     classString += `    String${arraySymbol} ${name};\n`;
                 }else{
-                    classString += `    ${toUpperFirstChar(name)} ${name};\n`;
+                    classString += `    ${toUpperFirstChar(name)}${arraySymbol} ${name};\n`;
                 }
             }
             classString += "}\n"
